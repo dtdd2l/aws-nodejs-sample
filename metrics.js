@@ -1,3 +1,7 @@
+const serviceAndStage = require('./service-and-stage');
+const service = serviceAndStage.Service;
+const stage = serviceAndStage.Stage;
+
 module.exports = [
   {
     MetricName: 'Latency', /* required */
@@ -5,7 +9,7 @@ module.exports = [
     Dimensions: [
       {
         Name: 'FunctionName', /* required */
-        Value: 'perf-attributes' /* required */
+        Value: stage + '-' + service /* required */
       }
     ]
   },
@@ -15,7 +19,7 @@ module.exports = [
     Dimensions: [
       {
         Name: 'FunctionName', /* required */
-        Value: 'perf-attributes' /* required */
+        Value: stage + '-' + service /* required */
       }
     ]
   },
@@ -25,7 +29,7 @@ module.exports = [
     Dimensions: [
       {
         Name: 'FunctionName', /* required */
-        Value: 'attributes-perf-api' /* required */
+        Value: service + '-' + stage + '-api' /* required */
       }
     ]
   },
@@ -35,7 +39,7 @@ module.exports = [
     Dimensions: [
       {
         Name: 'FunctionName', /* required */
-        Value: 'attributes-perf-api' /* required */
+        Value: service + '-' + stage + '-api' /* required */
       }
     ]
   },
@@ -45,7 +49,7 @@ module.exports = [
     Dimensions: [
       {
         Name: 'FunctionName', /* required */
-        Value: 'attributes-perf-api' /* required */
+        Value: service + '-' + stage + '-api' /* required */
       }
     ]
   },
@@ -55,7 +59,7 @@ module.exports = [
     Dimensions: [
       {
         Name: 'FunctionName', /* required */
-        Value: 'attributes-perf-publish-events' /* required */
+        Value: service + '-' + stage + '-publish-events' /* required */
       }
     ]
   },
@@ -65,7 +69,7 @@ module.exports = [
     Dimensions: [
       {
         Name: 'FunctionName', /* required */
-        Value: 'attributes-perf-publish-events' /* required */
+        Value: service + '-' + stage + '-publish-events' /* required */
       }
     ]
   },
@@ -75,7 +79,7 @@ module.exports = [
     Dimensions: [
       {
         Name: 'FunctionName', /* required */
-        Value: 'attributes-perf-publish-events' /* required */
+        Value: service + '-' + stage + '-publish-events' /* required */
       }
     ]
   },
@@ -85,7 +89,7 @@ module.exports = [
     Dimensions: [
       {
         Name: 'FunctionName', /* required */
-        Value: 'attributes-perf-attributesToECS' /* required */
+        Value: service + '-' + stage + '-attributesToECS' /* required */
       }
     ]
   },
@@ -95,7 +99,7 @@ module.exports = [
     Dimensions: [
       {
         Name: 'FunctionName', /* required */
-        Value: 'attributes-perf-attributesToECS' /* required */
+        Value: service + '-' + stage + '-attributesToECS' /* required */
       }
     ]
   },
@@ -105,7 +109,7 @@ module.exports = [
     Dimensions: [
       {
         Name: 'FunctionName', /* required */
-        Value: 'attributes-perf-attributesToECS' /* required */
+        Value: service + '-' + stage + '-attributesToECS' /* required */
       }
     ]
   },
@@ -115,7 +119,7 @@ module.exports = [
     Dimensions: [
       {
         Name: 'TableName', /* required */
-        Value: 'attributes-service-perf_Definitions' /* required */
+        Value: service + '-service-' + stage + '_Definitions' /* required */
       }
     ]
   },
@@ -125,7 +129,7 @@ module.exports = [
     Dimensions: [
       {
         Name: 'TableName', /* required */
-        Value: 'attributes-service-perf_Definitions' /* required */
+        Value: service + '-service-' + stage + '_Definitions' /* required */
       },
       {
         Name: 'Operation', /* required */
@@ -139,7 +143,7 @@ module.exports = [
     Dimensions: [
       {
         Name: 'TableName', /* required */
-        Value: 'attributes-service-perf_Values' /* required */
+        Value: service + '-service-' + stage + '_Values' /* required */
       }
     ]
   },
@@ -149,7 +153,7 @@ module.exports = [
     Dimensions: [
       {
         Name: 'TableName', /* required */
-        Value: 'attributes-service-perf_Values' /* required */
+        Value: service + '-service-' + stage + '_Values' /* required */
       }
     ]
   },
@@ -159,7 +163,7 @@ module.exports = [
     Dimensions: [
       {
         Name: 'TableName', /* required */
-        Value: 'attributes-service-perf_Values' /* required */
+        Value: service + '-service-' + stage + '_Values' /* required */
       }
     ]
   },
@@ -169,7 +173,7 @@ module.exports = [
     Dimensions: [
       {
         Name: 'TableName', /* required */
-        Value: 'attributes-service-perf_Values' /* required */
+        Value: service + '-service-' + stage + '_Values' /* required */
       }
     ]
   },
@@ -179,7 +183,7 @@ module.exports = [
     Dimensions: [
       {
         Name: 'TableName', /* required */
-        Value: 'attributes-service-perf_Values' /* required */
+        Value: service + '-service-' + stage + '_Values' /* required */
       },
       {
         Name: 'Operation', /* required */
@@ -193,7 +197,7 @@ module.exports = [
     Dimensions: [
       {
         Name: 'TableName', /* required */
-        Value: 'attributes-service-perf_Values' /* required */
+        Value: service + '-service-' + stage + '_Values' /* required */
       },
       {
         Name: 'Operation', /* required */
@@ -207,7 +211,7 @@ module.exports = [
     Dimensions: [
       {
         Name: 'TableName', /* required */
-        Value: 'attributes-service-perf_Values' /* required */
+        Value: service + '-service-' + stage + '_Values' /* required */
       },
       {
         Name: 'Operation', /* required */
@@ -221,7 +225,7 @@ module.exports = [
     Dimensions: [
       {
         Name: 'TableName', /* required */
-        Value: 'attributes-service-perf_Values' /* required */
+        Value: service + '-service-' + stage + '_Values' /* required */
       },
       {
         Name: 'Operation', /* required */
@@ -235,7 +239,7 @@ module.exports = [
     Dimensions: [
       {
         Name: 'TableName', /* required */
-        Value: 'attributes-service-perf_Values' /* required */
+        Value: service + '-service-' + stage + '_Values' /* required */
       },
       {
         Name: 'Operation', /* required */
@@ -249,7 +253,7 @@ module.exports = [
     Dimensions: [
       {
         Name: 'TopicName', /* required */
-        Value: 'attributes-perf' /* required */
+        Value: service + '-' + stage /* required */
       }
     ]
   },
@@ -259,7 +263,7 @@ module.exports = [
     Dimensions: [
       {
         Name: 'TopicName', /* required */
-        Value: 'attributes-perf' /* required */
+        Value: service + '-' + stage /* required */
       }
     ]
   },

@@ -1,6 +1,7 @@
 {
     "dependencies": {
         "aws-sdk": ">= 2.0.9",
-        "co": "4.6.0"
+        "co": "4.6.0",
+        "jsonexport": "1.5.2"
     }
 }
