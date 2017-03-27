@@ -11,9 +11,9 @@ dependencies (including the AWS SDK for Node.js) can be installed with:
 
     npm install
 
-## Basic Configuration
+## AWS Security Configuration
 
-You need to set up your AWS security credentials before the sample code is able
+You need to set up your AWS security credentials before the code is able
 to connect to AWS. You can do this by creating a file named "credentials" at ~/.aws/
 (C:\Users\USER_NAME\.aws\ for Windows users) and saving the following lines in the file:
 
@@ -25,6 +25,21 @@ See the [Security Credentials](http://aws.amazon.com/security-credentials) page.
 It's also possible to configure your credentials via a configuration file or
 directly in source. See the AWS SDK for Node.js [Developer Guide](http://docs.aws.amazon.com/AWSJavaScriptSDK/guide/node-configuring.html)
 for more information.
+
+## Report Configuration
+
+Configuration of the report is done by maintaining the set of options for the call to [CloudWatch getMetricStatistics](http://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/CloudWatch.html#getMetricStatistics-property).  These options have been split into a few different files to make things clearer.
+
+To configure which services and metrics to gather stats for, edit `metrics.js`.  It might be useful to consult the list of [AWS Namespaces](http://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/aws-namespaces.html), [API Gateway Metrics and Dimensions](http://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/api-gateway-metrics-dimensions.html), [Lambda Metrics and Dimensions](http://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/lam-metricscollected.html), [DynamoDB Metrics and Dimensions](http://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/dynamo-metricscollected.html), [ElasticSearch Metrics and Dimensions](http://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/es-metricscollected.html), and/or [SNS Metrics and Dimensions](http://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/sns-metricscollected.html). 
+
+To configure what period and stats to gather, edit `period-and-stats.js`.
+
+To configure the date range, edit `date-range.js`.  These values should be in ISO 8601 format.
+
+## Usage
+
+To run the utility, execute the following:
+`node report-cloudwatch-metrics.js`
 
 ## License
 
