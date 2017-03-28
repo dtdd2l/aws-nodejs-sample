@@ -62,6 +62,7 @@ Promise.all(promises).then(values => {
     if (err) return console.log(err);
     csv = csv.replace(/,,/g, ',0,');
     csv = csv.replace(/,,/g, ',0,');
+    csv = csv.replace(/,$/g, ',0');
     writeReport(fileNamePrefix + 'summary.csv', csv, 'Summary CSV')
   });
 }).catch(err => {
