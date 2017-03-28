@@ -1,6 +1,5 @@
 'use strict';
 
-const co = require('co');
 const fs = require('fs');
 const jsonexport = require('jsonexport');
 const util = require('util');
@@ -16,13 +15,15 @@ const periodAndStats = require('./period-and-stats');
 const dateRange = require('./date-range');
 const metrics = require('./metrics');
 
-let summaryReport = {};
-let detailedReport = {};
 let promises = [];
 let params;
+let summaryReport = Object.assign({}, dateRange, {
+  'Period': periodAndStats.Period
+});
+let detailedReport = Object.assign({}, summaryReport);
 
 function writeReport(filename, data, descr) {
-  fs.writeFile('reports/' + filename, JSON.stringify(data), (err) => {
+  fs.writeFile('reports/' + filename, data, (err) => {
     if (err) throw err;
     console.log(descr + ' report saved to reports/' + filename);
   });
@@ -50,11 +51,17 @@ Promise.all(promises).then(values => {
     detailedReport[reportKey] = data;
   }
   console.log('summaryReport = ' + util.inspect(summaryReport));
+
   const fileNamePrefix = service + ' ' + stage + ' metrics ' + dateRange.StartTime.replace(/:/g, '-') + ' ' + dateRange.EndTime.replace(/:/g, '-') + ' ';
-  writeReport(fileNamePrefix + 'summary.json', summaryReport, 'Summary JSON ');
-  writeReport(fileNamePrefix + 'detailed.json', detailedReport, 'Detailed JSON');
-  jsonexport(summaryReport, function (err, csv) {
+  writeReport(fileNamePrefix + 'summary.json', JSON.stringify(summaryReport), 'Summary JSON ');
+  writeReport(fileNamePrefix + 'detailed.json', JSON.stringify(detailedReport), 'Detailed JSON');
+  const jsonexportOptions = {
+    verticalOutput: false
+  };
+  jsonexport(summaryReport, jsonexportOptions, function (err, csv) {
     if (err) return console.log(err);
+    csv = csv.replace(/,,/g, ',0,');
+    csv = csv.replace(/,,/g, ',0,');
     writeReport(fileNamePrefix + 'summary.csv', csv, 'Summary CSV')
   });
 }).catch(err => {
