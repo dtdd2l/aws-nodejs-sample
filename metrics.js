@@ -8,7 +8,7 @@ module.exports = [
     Namespace: 'AWS/ApiGateway', /* required */
     Dimensions: [
       {
-        Name: 'FunctionName', /* required */
+        Name: 'ApiName', /* required */
         Value: stage + '-' + service /* required */
       }
     ]
@@ -18,7 +18,7 @@ module.exports = [
     Namespace: 'AWS/ApiGateway', /* required */
     Dimensions: [
       {
-        Name: 'FunctionName', /* required */
+        Name: 'ApiName', /* required */
         Value: stage + '-' + service /* required */
       }
     ]

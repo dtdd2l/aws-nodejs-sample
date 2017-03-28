@@ -1,4 +1,4 @@
 module.exports = {
-  StartTime: '2017-03-23T20:34:49.157Z', /* required */
-  EndTime: '2017-03-23T20:50:45.416Z', /* required */
+  StartTime: '2017-03-23T19:58:49.364Z', /* required */
+  EndTime: '2017-03-23T20:14:30.189Z', /* required */
 };

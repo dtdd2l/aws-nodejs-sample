@@ -50,7 +50,7 @@ Promise.all(promises).then(values => {
     detailedReport[reportKey] = data;
   }
   console.log('summaryReport = ' + util.inspect(summaryReport));
-  const fileNamePrefix = service + ' ' + stage + ' ' + dateRange.StartTime.replace(/:/g, '-') + ' ' + dateRange.EndTime.replace(/:/g, '-') + ' ';
+  const fileNamePrefix = service + ' ' + stage + ' metrics ' + dateRange.StartTime.replace(/:/g, '-') + ' ' + dateRange.EndTime.replace(/:/g, '-') + ' ';
   writeReport(fileNamePrefix + 'summary.json', summaryReport, 'Summary JSON ');
   writeReport(fileNamePrefix + 'detailed.json', detailedReport, 'Detailed JSON');
   jsonexport(summaryReport, function (err, csv) {
