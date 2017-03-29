@@ -14,8 +14,12 @@ const stage = serviceAndStage.Stage;
 const periodAndStats = require('./period-and-stats');
 const dateRange = require('./date-range');
 const metrics = require('./metrics');
+const lambdaMetrics = require('./lambda-metrics');
+const dynamodbMetrics = require('./dynamodb-metrics');
 
-let promises = [];
+const metricSets = [];
+const promises = [];
+
 let params;
 let summaryReport = Object.assign({}, dateRange, {
   'Period': periodAndStats.Period
@@ -28,6 +32,13 @@ function writeReport(filename, data, descr) {
     console.log(descr + ' report saved to reports/' + filename);
   });
 }
+
+Array.prototype.push.apply(metrics, lambdaMetrics('api'));
+Array.prototype.push.apply(metrics, lambdaMetrics('definitionsToECS'));
+Array.prototype.push.apply(metrics, lambdaMetrics('attributesToECS'));
+Array.prototype.push.apply(metrics, lambdaMetrics('publish-events'));
+Array.prototype.push.apply(metrics, dynamodbMetrics('Definitions'));
+Array.prototype.push.apply(metrics, dynamodbMetrics('Values'));
 
 for (let metric of metrics) {
     params = Object.assign({}, periodAndStats, dateRange, metric);
