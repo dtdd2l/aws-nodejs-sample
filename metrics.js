@@ -6,6 +6,9 @@ const stage = serviceAndStage.Stage;
 
 module.exports = [
   {
+    Statistics: [
+      'Sum'
+    ],
     MetricName: '4XXError', /* required */
     Namespace: 'AWS/ApiGateway', /* required */
     Dimensions: [
@@ -16,6 +19,9 @@ module.exports = [
     ]
   },
   {
+    Statistics: [
+      'Sum'
+    ],
     MetricName: '5XXError', /* required */
     Namespace: 'AWS/ApiGateway', /* required */
     Dimensions: [
@@ -26,6 +32,9 @@ module.exports = [
     ]
   },
   {
+    Statistics: [
+      'Sum'
+    ],
     MetricName: 'CacheHitCount', /* required */
     Namespace: 'AWS/ApiGateway', /* required */
     Dimensions: [
@@ -36,6 +45,9 @@ module.exports = [
     ]
   },
   {
+    Statistics: [
+      'Sum'
+    ],
     MetricName: 'CacheMissCount', /* required */
     Namespace: 'AWS/ApiGateway', /* required */
     Dimensions: [
@@ -46,6 +58,9 @@ module.exports = [
     ]
   },
   {
+    Statistics: [
+      'Sum'
+    ],
     MetricName: 'Count', /* required */
     Namespace: 'AWS/ApiGateway', /* required */
     Dimensions: [
@@ -56,6 +71,9 @@ module.exports = [
     ]
   },
   {
+    Statistics: [
+      'Average'
+    ],
     MetricName: 'IntegrationLatency', /* required */
     Namespace: 'AWS/ApiGateway', /* required */
     Dimensions: [
@@ -66,6 +84,9 @@ module.exports = [
     ]
   },
   {
+    Statistics: [
+      'Average'
+    ],
     MetricName: 'Latency', /* required */
     Namespace: 'AWS/ApiGateway', /* required */
     Dimensions: [
@@ -76,6 +97,9 @@ module.exports = [
     ]
   },
   {
+    Statistics: [
+      'Sum'
+    ],
     MetricName: 'NumberOfNotificationsDelivered', /* required */
     Namespace: 'AWS/SNS', /* required */
     Dimensions: [
@@ -86,6 +110,9 @@ module.exports = [
     ]
   },
   {
+    Statistics: [
+      'Sum'
+    ],
     MetricName: 'NumberOfNotificationsFailed', /* required */
     Namespace: 'AWS/SNS', /* required */
     Dimensions: [

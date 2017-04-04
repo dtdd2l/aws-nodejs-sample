@@ -11,19 +11,19 @@ const cw = new AWS.CloudWatch({apiVersion: '2010-08-01'});
 const serviceAndStage = require('./service-and-stage');
 const service = serviceAndStage.Service;
 const stage = serviceAndStage.Stage;
-const periodAndStats = require('./period-and-stats');
 const dateRange = require('./date-range');
 const metrics = require('./metrics');
-const lambdaMetrics = require('./lambda-metrics');
-const dynamodbMetrics = require('./dynamodb-metrics');
+const lambda = require('./lambda-metrics');
+const dynamodb = require('./dynamodb-metrics');
 
-const metricSets = [];
+const period = {
+  'Period': 60 /* required */
+};
+
 const promises = [];
 
 let params;
-let summaryReport = Object.assign({}, dateRange, {
-  'Period': periodAndStats.Period
-});
+let summaryReport = Object.assign({}, dateRange, period);
 let detailedReport = Object.assign({}, summaryReport);
 
 function writeReport(filename, data, descr) {
@@ -33,15 +33,16 @@ function writeReport(filename, data, descr) {
   });
 }
 
-Array.prototype.push.apply(metrics, lambdaMetrics('api'));
-Array.prototype.push.apply(metrics, lambdaMetrics('definitionsToECS'));
-Array.prototype.push.apply(metrics, lambdaMetrics('attributesToECS'));
-Array.prototype.push.apply(metrics, lambdaMetrics('publish-events'));
-Array.prototype.push.apply(metrics, dynamodbMetrics('Definitions'));
-Array.prototype.push.apply(metrics, dynamodbMetrics('Values'));
+Array.prototype.push.apply(metrics, lambda('api'));
+Array.prototype.push.apply(metrics, lambda('definitionsToECS'));
+Array.prototype.push.apply(metrics, lambda('attributesToECS'));
+Array.prototype.push.apply(metrics, lambda('publish-events'));
+Array.prototype.push.apply(metrics, dynamodb('Definitions'));
+Array.prototype.push.apply(metrics, dynamodb('Values'));
 
 for (let metric of metrics) {
-    params = Object.assign({}, periodAndStats, dateRange, metric);
+    params = Object.assign({}, period, dateRange, metric);
+    console.log('params = ' + util.inspect(params));
     promises.push(cw.getMetricStatistics(params).promise());
 }
 
@@ -51,14 +52,30 @@ Promise.all(promises).then(values => {
   for (; i < valCount; i++) {
     const metric = metrics[i];
     const data = values[i];
+    const stats = metric.Statistics[0];
     const operation = metric.Dimensions.length > 1 ?
       ' ' + metric.Dimensions[1].Value : '';
     const reportKey = metric.Namespace + ' ' + metric.Dimensions[0].Value
-     + operation + ' ' + metric.MetricName;
+     + operation + ' ' + metric.MetricName + ' ' + stats;
     const dps = data.Datapoints;
-    data.datapointsAveraged = dps.length > 0 ?
-      dps.reduce((a, b) => a + b.Average, dps[0].Average) / dps.length : 0;
-    summaryReport[reportKey] = data.datapointsAveraged;
+    switch(stats) {
+      case 'Average':
+        data.datapointsAveraged = dps.length > 0 ?
+          dps.reduce((a, b) => a + b[stats], dps[0][stats]) / dps.length : 0;
+        summaryReport[reportKey] = data.datapointsAveraged;
+      break;
+      case 'Sum':
+        data.sumTotal = dps.length > 0 ?
+          dps.reduce((a, b) => a + b[stats], dps[0][stats]) : 0;
+        summaryReport[reportKey + ' Total'] = data.sumTotal;
+        data.sumAvgPerSec = dps.length > 0 ? data.sumTotal / dps.length / period.Period : 0;
+        summaryReport[reportKey + ' avg per second'] = data.sumAvgPerSec;
+        data.spike = dps.length > 0 ?
+          dps.reduce((a, b) => a > b[stats] ? a : b[stats], dps[0][stats]) / period.Period : 0;
+        summaryReport[reportKey + ' avg per second in spike minute'] = data.spike;
+      break;
+    }
+
     detailedReport[reportKey] = data;
   }
   console.log('summaryReport = ' + util.inspect(summaryReport));

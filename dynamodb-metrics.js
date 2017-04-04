@@ -8,7 +8,10 @@ module.exports = (tableName) => {
   tableName = service + '-service-' + stage + '_' + tableName;
   return [
     {
-      MetricName: 'ThrottledRequests', /* required */
+      Statistics: [
+        'Average'
+      ],
+      MetricName: 'SuccessfulRequestLatency', /* required */
       Namespace: 'AWS/DynamoDB', /* required */
       Dimensions: [
         {
@@ -18,6 +21,141 @@ module.exports = (tableName) => {
       ]
     },
     {
+      Statistics: [
+        'Average'
+      ],
+      MetricName: 'SuccessfulRequestLatency', /* required */
+      Namespace: 'AWS/DynamoDB', /* required */
+      Dimensions: [
+        {
+          Name: 'TableName', /* required */
+          Value: tableName /* required */
+        },
+        {
+          Name: 'Operation', /* required */
+          Value: 'GetItem' /* required */
+        }
+      ]
+    },
+    {
+      Statistics: [
+        'Average'
+      ],
+      MetricName: 'SuccessfulRequestLatency', /* required */
+      Namespace: 'AWS/DynamoDB', /* required */
+      Dimensions: [
+        {
+          Name: 'TableName', /* required */
+          Value: tableName /* required */
+        },
+        {
+          Name: 'Operation', /* required */
+          Value: 'Query' /* required */
+        }
+      ]
+    },
+    {
+      Statistics: [
+        'Average'
+      ],
+      MetricName: 'SuccessfulRequestLatency', /* required */
+      Namespace: 'AWS/DynamoDB', /* required */
+      Dimensions: [
+        {
+          Name: 'TableName', /* required */
+          Value: tableName /* required */
+        },
+        {
+          Name: 'Operation', /* required */
+          Value: 'Scan' /* required */
+        }
+      ]
+    },
+    {
+      Statistics: [
+        'Average'
+      ],
+      MetricName: 'SuccessfulRequestLatency', /* required */
+      Namespace: 'AWS/DynamoDB', /* required */
+      Dimensions: [
+        {
+          Name: 'TableName', /* required */
+          Value: tableName /* required */
+        },
+        {
+          Name: 'Operation', /* required */
+          Value: 'DeleteItem' /* required */
+        }
+      ]
+    },
+    {
+      Statistics: [
+        'Average'
+      ],
+      MetricName: 'SuccessfulRequestLatency', /* required */
+      Namespace: 'AWS/DynamoDB', /* required */
+      Dimensions: [
+        {
+          Name: 'TableName', /* required */
+          Value: tableName /* required */
+        },
+        {
+          Name: 'Operation', /* required */
+          Value: 'GetItem' /* required */
+        }
+      ]
+    },
+    {
+      Statistics: [
+        'Average'
+      ],
+      MetricName: 'SuccessfulRequestLatency', /* required */
+      Namespace: 'AWS/DynamoDB', /* required */
+      Dimensions: [
+        {
+          Name: 'TableName', /* required */
+          Value: tableName /* required */
+        },
+        {
+          Name: 'Operation', /* required */
+          Value: 'PutItem' /* required */
+        }
+      ]
+    },
+    {
+      Statistics: [
+        'Average'
+      ],
+      MetricName: 'SuccessfulRequestLatency', /* required */
+      Namespace: 'AWS/DynamoDB', /* required */
+      Dimensions: [
+        {
+          Name: 'TableName', /* required */
+          Value: tableName /* required */
+        },
+        {
+          Name: 'Operation', /* required */
+          Value: 'UpdateItem' /* required */
+        }
+      ]
+    },
+    {
+      Statistics: [
+        'Sum'
+      ],
+      MetricName: 'ReadThrottleEvents', /* required */
+      Namespace: 'AWS/DynamoDB', /* required */
+      Dimensions: [
+        {
+          Name: 'TableName', /* required */
+          Value: tableName /* required */
+        }
+      ]
+    },
+    {
+      Statistics: [
+        'Sum'
+      ],
       MetricName: 'ConsumedReadCapacityUnits', /* required */
       Namespace: 'AWS/DynamoDB', /* required */
       Dimensions: [
@@ -28,6 +166,9 @@ module.exports = (tableName) => {
       ]
     },
     {
+      Statistics: [
+        'Sum'
+      ],
       MetricName: 'ConsumedWriteCapacityUnits', /* required */
       Namespace: 'AWS/DynamoDB', /* required */
       Dimensions: [
@@ -38,6 +179,9 @@ module.exports = (tableName) => {
       ]
     },
     {
+      Statistics: [
+        'Sum'
+      ],
       MetricName: 'SystemErrors', /* required */
       Namespace: 'AWS/DynamoDB', /* required */
       Dimensions: [
@@ -48,6 +192,9 @@ module.exports = (tableName) => {
       ]
     },
     {
+      Statistics: [
+        'Sum'
+      ],
       MetricName: 'UserErrors', /* required */
       Namespace: 'AWS/DynamoDB', /* required */
       Dimensions: [
@@ -58,16 +205,9 @@ module.exports = (tableName) => {
       ]
     },
     {
-      MetricName: 'SuccessfulRequestLatency', /* required */
-      Namespace: 'AWS/DynamoDB', /* required */
-      Dimensions: [
-        {
-          Name: 'TableName', /* required */
-          Value: tableName /* required */
-        }
-      ]
-    },
-    {
+      Statistics: [
+        'Sum'
+      ],
       MetricName: 'ConditionalCheckFailedRequests', /* required */
       Namespace: 'AWS/DynamoDB', /* required */
       Dimensions: [
@@ -78,6 +218,9 @@ module.exports = (tableName) => {
       ]
     },
     {
+      Statistics: [
+        'Sum'
+      ],
       MetricName: 'WriteThrottleEvents', /* required */
       Namespace: 'AWS/DynamoDB', /* required */
       Dimensions: [
@@ -88,104 +231,9 @@ module.exports = (tableName) => {
       ]
     },
     {
-      MetricName: 'SuccessfulRequestLatency', /* required */
-      Namespace: 'AWS/DynamoDB', /* required */
-      Dimensions: [
-        {
-          Name: 'TableName', /* required */
-          Value: tableName /* required */
-        },
-        {
-          Name: 'Operation', /* required */
-          Value: 'GetItem' /* required */
-        }
-      ]
-    },
-    {
-      MetricName: 'SuccessfulRequestLatency', /* required */
-      Namespace: 'AWS/DynamoDB', /* required */
-      Dimensions: [
-        {
-          Name: 'TableName', /* required */
-          Value: tableName /* required */
-        },
-        {
-          Name: 'Operation', /* required */
-          Value: 'Query' /* required */
-        }
-      ]
-    },
-    {
-      MetricName: 'SuccessfulRequestLatency', /* required */
-      Namespace: 'AWS/DynamoDB', /* required */
-      Dimensions: [
-        {
-          Name: 'TableName', /* required */
-          Value: tableName /* required */
-        },
-        {
-          Name: 'Operation', /* required */
-          Value: 'Scan' /* required */
-        }
-      ]
-    },
-    {
-      MetricName: 'SuccessfulRequestLatency', /* required */
-      Namespace: 'AWS/DynamoDB', /* required */
-      Dimensions: [
-        {
-          Name: 'TableName', /* required */
-          Value: tableName /* required */
-        },
-        {
-          Name: 'Operation', /* required */
-          Value: 'DeleteItem' /* required */
-        }
-      ]
-    },
-    {
-      MetricName: 'SuccessfulRequestLatency', /* required */
-      Namespace: 'AWS/DynamoDB', /* required */
-      Dimensions: [
-        {
-          Name: 'TableName', /* required */
-          Value: tableName /* required */
-        },
-        {
-          Name: 'Operation', /* required */
-          Value: 'GetItem' /* required */
-        }
-      ]
-    },
-    {
-      MetricName: 'SuccessfulRequestLatency', /* required */
-      Namespace: 'AWS/DynamoDB', /* required */
-      Dimensions: [
-        {
-          Name: 'TableName', /* required */
-          Value: tableName /* required */
-        },
-        {
-          Name: 'Operation', /* required */
-          Value: 'PutItem' /* required */
-        }
-      ]
-    },
-    {
-      MetricName: 'SuccessfulRequestLatency', /* required */
-      Namespace: 'AWS/DynamoDB', /* required */
-      Dimensions: [
-        {
-          Name: 'TableName', /* required */
-          Value: tableName /* required */
-        },
-        {
-          Name: 'Operation', /* required */
-          Value: 'UpdateItem' /* required */
-        }
-      ]
-    },
-    {
+      Statistics: [
+        'Sum'
+      ],
       MetricName: 'ReturnedItemCount', /* required */
       Namespace: 'AWS/DynamoDB', /* required */
       Dimensions: [
@@ -200,6 +248,9 @@ module.exports = (tableName) => {
       ]
     },
     {
+      Statistics: [
+        'Sum'
+      ],
       MetricName: 'ReturnedItemCount', /* required */
       Namespace: 'AWS/DynamoDB', /* required */
       Dimensions: [
@@ -214,6 +265,9 @@ module.exports = (tableName) => {
       ]
     },
     {
+      Statistics: [
+        'Sum'
+      ],
       MetricName: 'SystemErrors', /* required */
       Namespace: 'AWS/DynamoDB', /* required */
       Dimensions: [
@@ -228,6 +282,9 @@ module.exports = (tableName) => {
       ]
     },
     {
+      Statistics: [
+        'Sum'
+      ],
       MetricName: 'ThrottledRequests', /* required */
       Namespace: 'AWS/DynamoDB', /* required */
       Dimensions: [
@@ -242,6 +299,9 @@ module.exports = (tableName) => {
       ]
     },
     {
+      Statistics: [
+        'Sum'
+      ],
       MetricName: 'ThrottledRequests', /* required */
       Namespace: 'AWS/DynamoDB', /* required */
       Dimensions: [
@@ -256,6 +316,9 @@ module.exports = (tableName) => {
       ]
     },
     {
+      Statistics: [
+        'Sum'
+      ],
       MetricName: 'ThrottledRequests', /* required */
       Namespace: 'AWS/DynamoDB', /* required */
       Dimensions: [
@@ -270,6 +333,9 @@ module.exports = (tableName) => {
       ]
     },
     {
+      Statistics: [
+        'Sum'
+      ],
       MetricName: 'ThrottledRequests', /* required */
       Namespace: 'AWS/DynamoDB', /* required */
       Dimensions: [

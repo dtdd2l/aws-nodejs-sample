@@ -1,4 +1,4 @@
 module.exports = {
   Service: 'attributes', /* required */
-  Stage: 'dtd', /* required */
+  Stage: 'perf', /* required */
 };

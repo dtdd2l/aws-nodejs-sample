@@ -8,6 +8,9 @@ module.exports = (functionName) => {
   functionName = service + '-' + stage + '-' + functionName;
   return [
     {
+      Statistics: [
+        'Average'
+      ],
       MetricName: 'Duration', /* required */
       Namespace: 'AWS/Lambda', /* required */
       Dimensions: [
@@ -18,26 +21,9 @@ module.exports = (functionName) => {
       ]
     },
     {
-      MetricName: 'Errors', /* required */
-      Namespace: 'AWS/Lambda', /* required */
-      Dimensions: [
-        {
-          Name: 'FunctionName', /* required */
-          Value: functionName /* required */
-        }
-      ]
-    },
-    {
-      MetricName: 'Invocations', /* required */
-      Namespace: 'AWS/Lambda', /* required */
-      Dimensions: [
-        {
-          Name: 'FunctionName', /* required */
-          Value: functionName /* required */
-        }
-      ]
-    },
-    {
+      Statistics: [
+        'Average'
+      ],
       MetricName: 'IteratorAge', /* required */
       Namespace: 'AWS/Lambda', /* required */
       Dimensions: [
@@ -48,6 +34,35 @@ module.exports = (functionName) => {
       ]
     },
     {
+      Statistics: [
+        'Sum'
+      ],
+      MetricName: 'Errors', /* required */
+      Namespace: 'AWS/Lambda', /* required */
+      Dimensions: [
+        {
+          Name: 'FunctionName', /* required */
+          Value: functionName /* required */
+        }
+      ]
+    },
+    {
+      Statistics: [
+        'Sum'
+      ],
+      MetricName: 'Invocations', /* required */
+      Namespace: 'AWS/Lambda', /* required */
+      Dimensions: [
+        {
+          Name: 'FunctionName', /* required */
+          Value: functionName /* required */
+        }
+      ]
+    },
+    {
+      Statistics: [
+        'Sum'
+      ],
       MetricName: 'Throttles', /* required */
       Namespace: 'AWS/Lambda', /* required */
       Dimensions: [
